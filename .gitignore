@@ -1,6 +1,8 @@
 # Ignore build directories
-devel/
 build/
+install/
+log/
+__pycache__/
 
 # Ignore dev directories
 .vscode/

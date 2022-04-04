@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>demo_pkg</name>
+  <version>0.0.0</version>
+  <description>Demo package for the 2022 SCR Software Challenge</description>
+  <maintainer email="noah.zemlin@ou.edu">Noah Zemlin</maintainer>
+  <license>MIT</license>
+
+  <depend>swc_msgs</depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
