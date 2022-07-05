@@ -2,7 +2,7 @@
 
 namespace RosSharp.RosBridgeClient.MessageTypes.Std
 {
-    [RequireComponent(typeof(AckermannController))]
+    [RequireComponent(typeof(BoatController))]
     public class VelocityPublisher : UnityPublisher<Float32>
     {
         private Float32 message;
@@ -11,14 +11,14 @@ namespace RosSharp.RosBridgeClient.MessageTypes.Std
 
         private float previousScanTime = 5;
         private float updatePeriod = 0.05f;
-        private AckermannController c;
+        private BoatController c;
 
         public bool noNoiseOverride = false;
 
         protected override void Start()
         {
             base.Start();
-            c = GetComponent<AckermannController>();
+            c = GetComponent<BoatController>();
             message = new Float32();
 
             switch (ConfigLoader.competition.NoiseLevel) {

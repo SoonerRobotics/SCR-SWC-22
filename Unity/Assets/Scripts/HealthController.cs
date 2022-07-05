@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    private AckermannController car;
+    private BoatController car;
     private float lastHitTime = 0f;
     private float iFrameTime = 0.2f; // Can't get hit until this time (seconds) has passed
 
     void Start()
     {
-        car = GetComponent<AckermannController>();
+        car = GetComponent<BoatController>();
     }
 
     private void OnCollisionEnter(Collision other) {

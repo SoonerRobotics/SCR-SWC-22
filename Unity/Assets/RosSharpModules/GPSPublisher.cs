@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace RosSharp.RosBridgeClient.MessageTypes.swc_msgs
+namespace RosSharp.RosBridgeClient.MessageTypes.Swc
 {
-    public class GPSPublisher : UnityPublisher<Gps>
+    public class GPSPublisher : UnityPublisher<GPS>
     {
-        private Gps message;
+        private GPS message;
 
         private float latNoiseStdDev = 1.843f;
         private float lonNoiseStdDev = 2.138f;
@@ -20,7 +20,7 @@ namespace RosSharp.RosBridgeClient.MessageTypes.swc_msgs
         protected override void Start()
         {
             base.Start();
-            message = new Gps();
+            message = new GPS();
 
             switch (ConfigLoader.competition.NoiseLevel) {
                 case ConfigLoader.CompetitionConfig.NoiseLevels.none:
@@ -50,8 +50,8 @@ namespace RosSharp.RosBridgeClient.MessageTypes.swc_msgs
 
         private void WriteMessage() {
             Vector3 pos = this.transform.position;
-            message.latitude = (pos.x + SimUtils.getRandNormal(0, latNoiseStdDev)) / 110944.33 + lat0Pos;
-            message.longitude = (pos.z + SimUtils.getRandNormal(0, lonNoiseStdDev)) / 91058.93 + lon0Pos;
+            message.lat = (pos.x + SimUtils.getRandNormal(0, latNoiseStdDev)) / 110944.33 + lat0Pos;
+            message.lon = (pos.z + SimUtils.getRandNormal(0, lonNoiseStdDev)) / 91058.93 + lon0Pos;
             Publish(message);
         }
     }

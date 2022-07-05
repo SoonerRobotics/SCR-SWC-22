@@ -11,6 +11,8 @@ public class Waypoint : MonoBehaviour
     private void FixedUpdate() {
         Transform robotTf = GameManager.instance.robotTf;
 
+        this.transform.position = new Vector3(this.transform.position.x, Mathf.Sin(Time.time) * 0.05F, this.transform.position.z);
+
         if (index == 0) {
             Destroy(this);
             return;

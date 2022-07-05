@@ -1,12 +1,12 @@
 ﻿using System.Threading;
 using UnityEngine;
 
-namespace RosSharp.RosBridgeClient.MessageTypes.swc_msgs
+namespace RosSharp.RosBridgeClient.MessageTypes.Swc
 {
-    [RequireComponent(typeof(AckermannController))]
+    [RequireComponent(typeof(BoatController))]
     public class ControlSubscriber : UnitySubscriber<Control>
     {
-        private AckermannController car;
+        private BoatController car;
 
         private Control lastMessage;
 
@@ -21,7 +21,7 @@ namespace RosSharp.RosBridgeClient.MessageTypes.swc_msgs
         protected override void Start()
         {
             base.Start();
-            car = GetComponent<AckermannController>();
+            car = GetComponent<BoatController>();
             lastMessage = new Control();
             startTime = Time.realtimeSinceStartup;
 
@@ -50,7 +50,7 @@ namespace RosSharp.RosBridgeClient.MessageTypes.swc_msgs
 
         private void FixedUpdate() {
             if (newMessage) {
-                car.SetControl(lastMessage.speed + SimUtils.getRandNormal(0, powerNoiseStdDev), lastMessage.turn_angle + SimUtils.getRandNormal(0, angleNoiseStdDev));
+                car.SetControl(lastMessage.rpm + SimUtils.getRandNormal(0, powerNoiseStdDev), lastMessage.turn_angle + SimUtils.getRandNormal(0, angleNoiseStdDev));
                 newMessage = false;
             }
 

@@ -31,8 +31,6 @@ public class ConfigLoader
         try
         {
             simulator.ManualControl = cfg["Simulator"]["ManualControl"].BoolValue;
-            simulator.EnableCamera = cfg["Simulator"]["EnableCamera"].BoolValue;
-            simulator.ManualTopSpeed = cfg["Simulator"]["ManualTopSpeed"].FloatValue;
             simulator.RosBridgeServerUrl = cfg["Simulator"]["RosBridgeUrl"].StringValue;
             simulator.Seed = cfg["Simulator"]["Seed"].IntValue;
             simulator.TimeScale = cfg["Simulator"]["TimeScale"].FloatValue;
@@ -96,8 +94,6 @@ public class ConfigLoader
     public class SimulatorConfig
     {
         public bool ManualControl = true;
-        public float ManualTopSpeed = 1.0f;
-        public bool EnableCamera = false;
         public string RosBridgeServerUrl = "ws://localhost:9090";
         public bool CompetitionMode = false;
         public int Seed = -1;

@@ -1,26 +1,26 @@
 ﻿using UnityEngine;
 
-namespace RosSharp.RosBridgeClient.MessageTypes.swc_msgs
+namespace RosSharp.RosBridgeClient.MessageTypes.Swc
 {
-    [RequireComponent(typeof(AckermannController))]
-    public class LinearVelocityPublisher : UnityPublisher<Gps>
+    [RequireComponent(typeof(BoatController))]
+    public class LinearVelocityPublisher : UnityPublisher<GPS>
     {
-        private Gps message;
+        private GPS message;
 
         private float previousScanTime = 5;
 
         private float velocityNoiseStdDev = 0.1f;
 
         private float updatePeriod = 0.05f;
-        private AckermannController c;
+        private BoatController c;
 
         public bool noNoiseOverride = false;
 
         protected override void Start()
         {
             base.Start();
-            c = GetComponent<AckermannController>();
-            message = new Gps();
+            c = GetComponent<BoatController>();
+            message = new GPS();
 
             switch (ConfigLoader.competition.NoiseLevel) {
                 case ConfigLoader.CompetitionConfig.NoiseLevels.none:
@@ -46,8 +46,8 @@ namespace RosSharp.RosBridgeClient.MessageTypes.swc_msgs
         }
 
         private void WriteMessage() {
-            message.latitude = Mathf.Round((c.linear_vel.x + SimUtils.getRandNormal(0, velocityNoiseStdDev) * c.Power / 4.0f) * 1000f) / 1000f;
-            message.longitude = Mathf.Round((c.linear_vel.z + SimUtils.getRandNormal(0, velocityNoiseStdDev) * c.Power / 4.0f) * 1000f) / 1000f;
+            message.lat = Mathf.Round((c.linear_vel.x + SimUtils.getRandNormal(0, velocityNoiseStdDev) * c.Power / 4.0f) * 1000f) / 1000f;
+            message.lon = Mathf.Round((c.linear_vel.z + SimUtils.getRandNormal(0, velocityNoiseStdDev) * c.Power / 4.0f) * 1000f) / 1000f;
             Publish(message);
         }
     }
