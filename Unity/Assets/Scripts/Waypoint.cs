@@ -6,6 +6,8 @@ public class Waypoint : MonoBehaviour
 {
     public int index;
     public float triggerDist = 1f;
+    public float captureTime = 5f;
+    private float captureStartTime = -1f;
     private bool reached = false;
 
     private void FixedUpdate() {
@@ -19,9 +21,22 @@ public class Waypoint : MonoBehaviour
         }
 
         if (!reached && (robotTf.position - transform.position).sqrMagnitude < triggerDist * triggerDist) {
-            reached = true;
-            GameManager.instance.ReachWaypoint(index);
-            Destroy(this);
+            if (captureStartTime < 0) {
+                captureStartTime = Time.fixedTime;
+                GameManager.instance.StartCapture();
+            }
+            
+            if (captureStartTime + captureTime < Time.fixedTime) {
+                reached = true;
+                GameManager.instance.FinishCapture();
+                GameManager.instance.ReachWaypoint(index);
+                Destroy(this);
+            }
+        } else {
+            if (captureStartTime > 0) {
+                captureStartTime = -1f;
+                GameManager.instance.EndCapture();
+            }
         }
     }
 }

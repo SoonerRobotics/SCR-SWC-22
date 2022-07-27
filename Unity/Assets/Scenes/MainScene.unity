@@ -1053,7 +1053,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829615084}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 938611d5f671cfe4f9be87c66d865ae1, type: 3}
   m_Name: 
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829615084}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f51320dc62f801a40b8ac30bb02afaef, type: 3}
   m_Name: 
@@ -1095,7 +1095,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829615084}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b44e1486d7dbdce40958f480202bf058, type: 3}
   m_Name: 
@@ -1109,7 +1109,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829615084}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5622a2e2753f1c14abdbf40795d4329b, type: 3}
   m_Name: 
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829615084}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6754bb5aaed72614b8f93c1d3ff3a992, type: 3}
   m_Name: 
@@ -2514,11 +2514,14 @@ MonoBehaviour:
   RecordMenu: {fileID: 2140772450}
   Slider: {fileID: 1511870107}
   SliderText: {fileID: 319283295}
+  RecordText: {fileID: 12193271}
   paused: 0
-  targetFreq: 735
+  captureStartTime: -1
+  targetFreq: 750
   minFreq: 735
   maxFreq: 792
   timeToTarget: 5
+  timeToComplete: 7
 --- !u!1 &1868617787
 GameObject:
   m_ObjectHideFlags: 0

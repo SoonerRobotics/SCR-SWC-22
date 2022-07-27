@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(RosConnector))]
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI loadingText;
     public TMP_InputField rootField;
+    public Button startButton;
     public float maxTime = 300f;
 
     public Transform robotTf;
@@ -31,11 +33,21 @@ public class GameManager : MonoBehaviour
     {
         INIT,
         WAITING_FOR_ROS,
+        READY,
         PLAYING,
         QUITTING
     }
 
     public GameState State { get; private set; } = GameState.INIT;
+
+    public enum CaptureState
+    {
+        NONE,
+        CAPTURING,
+        FINISHED
+    }
+
+    private CaptureState CapState = CaptureState.NONE;
 
     // Start is called before the first frame update
     void Start()
@@ -108,11 +120,20 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (State == GameState.READY && !rosConnector.Connected)
+        {
+            ReloadSim();
+        }
+
         if (State == GameState.WAITING_FOR_ROS && rosConnector.Connected)
         {
-            State = GameState.PLAYING;
-            SceneManager.LoadScene(1);
-            AddBonusAdjustments();
+            if (ConfigLoader.simulator.CompetitionMode) {
+                RestartSim();
+            } else {
+                State = GameState.READY;
+                startButton.interactable = true;
+                loadingText.text = "Ready! Press Start to begin.";
+            }
         }
 
         // Time limit reached
@@ -172,10 +193,12 @@ public class GameManager : MonoBehaviour
     // Restart the sim, basically just resetting the level
     public void RestartSim()
     {
-        State = GameState.PLAYING;
-        SceneManager.LoadScene(1);
-        adjustments = new List<ScoreAdjust>();
-        AddBonusAdjustments();
+        if (State == GameState.READY || State == GameState.PLAYING) {
+            State = GameState.PLAYING;
+            SceneManager.LoadScene(1);
+            adjustments = new List<ScoreAdjust>();
+            AddBonusAdjustments();
+        }
     }
 
     public void AddBonusAdjustments() {
@@ -260,6 +283,22 @@ public class GameManager : MonoBehaviour
     public void StartSim()
     {
         startTime = Time.time;
+    }
+
+    public void StartCapture() {
+        CapState = CaptureState.CAPTURING;
+    }
+
+    public void EndCapture() {
+        CapState = CaptureState.NONE;
+    }
+
+    public void FinishCapture() {
+        CapState = CaptureState.FINISHED;
+    }
+
+    public CaptureState CaptureStatus() {
+        return CapState;
     }
 
     public class ScoreAdjust
