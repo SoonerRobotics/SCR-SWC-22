@@ -1,5 +1,5 @@
-# Target robot speed (m/s)
-float32 speed
+# Target motor RPM (rpm)
+float32 rpm
 
-# Target robot wheel angle (degrees CW)
+# Target rudder fin angle (degrees)
 float32 turn_angle

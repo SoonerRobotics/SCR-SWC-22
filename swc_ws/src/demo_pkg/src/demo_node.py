@@ -16,8 +16,8 @@ class DemoNode(Node):
 
     def timer_callback(self):
         msg = Control()
-        msg.speed = 1.0
-        msg.turn_angle = 0.0
+        msg.rpm = 1.0
+        msg.turn_angle = 4.0
         self.publisher_.publish(msg)
 
 
