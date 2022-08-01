@@ -45,7 +45,8 @@ namespace RosSharp.RosBridgeClient.MessageTypes.Std
         }
 
         private void WriteMessage() {
-            message.data = Mathf.Round((c.Power + SimUtils.getRandNormal(0, velocityNoiseStdDev) * c.Power / 4.0f) * 1000f) / 1000f;
+            message.data = Mathf.Round((c.linear_vel.magnitude + SimUtils.getRandNormal(0, velocityNoiseStdDev)) * 1000f) / 1000f;
+            // message.data = Mathf.Round((c.Power + SimUtils.getRandNormal(0, velocityNoiseStdDev) * c.Power / 4.0f) * 1000f) / 1000f;
             Publish(message);
         }
     }
